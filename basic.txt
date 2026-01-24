@@ -1,0 +1,91 @@
+pip install langchain -> to install langchain framework
+
+langchain -> framework allows developers to create variety of applications using language models
+
+Context-aware features: LangChain connects language models with various context sources. This includes prompt directives, a handful of examples, and content based on responses. This allows language models to generate more accurate and relevant answers based on the information provided.
+
+The ability to infer: In addition, the language model can provide any answer based on the context given, or deduce for yourself what action to take. This means that the language model can go beyond simply reproducing information, analyzing a given situation and presenting an appropriate solution.
+
+langchain -> foundation, --> prompts, models, tools, retrievers all are wired together into a clean workflow. used for building simple rag sys, chatbot and simple agents
+
+langGraph -> memory, loop, decision, mult-agent-coordination langchain isn't alone enough. langGraph lets use stateful, branching and agentic workflows
+
+langflow -> drag, drop, experiment, prototype your ai pipelines without writing much code, perfect for fast iteration and collaboration
+
+langsmith -> production mode, tracing, debugging, evaluation, token tarcking everything you need to monitor and improve real ai apps
+
+therefore they all  work together 
+======================================================================================================================================/
+build with -> langchain
+
+scale with -> langGraph
+
+prototype with -> langflow
+
+ship with -> langsmith
+
+With LangChain, you can start developing language model-based applications more easily, customize features to suit your needs, and integrate with various data sources to handle complex tasks.
+======================================================================================================================================/
+langchain crash course --> https://www.youtube.com/watch?v=J7j5tCB_y4w
+
+channel name --> neuralnine
+======================================================================================================================================/
+
+langchain setup :
+
+create a repo for tracking and learning
+
+name langchain-yourname my case langchain-vip
+
+create a env in conda 
+
+cmd --> conda create -n langchain python=3.11
+
+activate that environment 
+
+conda activate langchain
+
+inside that environment
+
+pip install langchain -->  for installing langchain
+
+pip install langchain langchain-google-genai google-generativeai --> specific for google geminin and genai models
+
+similar cmds used for openai, anthropic, mistral etc
+
+======================================================================================================================================/
+
+create .env file for storing your API key from your providers openai, gemini, mistral
+
+FORMAT:
+OPENAI_API_KEY = "YOUR_KEY"
+MISTRAL_API_KEY = "YOUR_KEY"
+GOOGLE_API_KEY = "YOUR_KEY"
+
+======================================================================================================================================/
+
+installing python-dotenv
+
+pip install python-dotenv
+
+======================================================================================================================================/
+
+from langchain.agents import create_agents ==> used to create agents 
+
+from langchain.tools import tools ==> created agents can be used as tools 
+
+
+======================================================================================================================================/
+
+import requests
+from langchain_community.llms import Ollama
+# Initialize Ollama LLM
+llm = Ollama(model="qwen2.5:7b", base_url="http://localhost:11434")
+
+# Ask a question
+message = "What is the weather like in madurai? Make it funny!"
+response = llm.invoke(message)
+print(response)
+======================================================================================================================================/
+
+
