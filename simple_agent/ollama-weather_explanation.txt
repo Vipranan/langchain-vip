@@ -1,0 +1,26 @@
+LINE-BY-LINE EXPLANATION: ollama-weather.py
+==========================================
+
+Line 1: import requests
+- Imports the requests library (not used in this code)
+
+Line 2: # from langchain_community.llms import Ollama
+- Commented out old import from langchain_community
+
+Line 3: from langchain_ollama import ChatOllama
+- Imports ChatOllama class to interact with Ollama language models
+
+Line 5-6: # Initialize Ollama LLM
+- Comment explaining the next line's purpose
+
+Line 6: llm = ChatOllama(model="llama3.1:8b", base_url="http://localhost:11434")
+- Creates a ChatOllama instance using llama3.1 8B model connected to local Ollama server
+
+Line 8-11: # Ask a question ... # print(response)
+- Commented out old code that would ask about Mumbai weather
+
+Line 13: response = llm.invoke("What is the weather like in mumbai? Make it funny!")
+- Sends a prompt asking for funny weather info about Mumbai (note: model will make up data as it has no weather tool)
+
+Line 15: print(response.content)
+- Prints only the content of the response (the AI's answer)

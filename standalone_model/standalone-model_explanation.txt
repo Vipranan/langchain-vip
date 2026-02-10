@@ -1,0 +1,17 @@
+LINE-BY-LINE EXPLANATION: standalone-model.py
+==========================================
+
+Line 1: import requests
+- Imports the requests library (not used in this code)
+
+Line 2: from langchain_ollama import ChatOllama
+- Imports ChatOllama class to interact with Ollama language models
+
+Line 4-7: model = ChatOllama(model="llama3.1:8b", temperature=0.7)
+- Creates a ChatOllama instance using llama3.1 8B model with temperature 0.7 (balanced creativity)
+
+Line 9: response = model.invoke('hello, what is python ?')
+- Sends a simple question to the model asking about Python
+
+Line 11: print(response.content)
+- Prints only the content of the response (the AI's answer)

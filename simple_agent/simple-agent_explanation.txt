@@ -1,0 +1,65 @@
+LINE-BY-LINE EXPLANATION: simple-agent.py
+==========================================
+
+Line 1: import requests
+- Imports the requests library for making HTTP requests
+
+Line 2: from dotenv import load_dotenv
+- Imports load_dotenv function to load environment variables from .env file
+
+Line 4: from langchain.agents import create_agent
+- Imports the create_agent function to build an AI agent
+
+Line 5: from langchain.tools import tool
+- Imports the tool decorator to define custom tools for the agent
+
+Line 6: from langchain_ollama import ChatOllama   # NEW import
+- Imports ChatOllama class to interact with Ollama language models
+
+Line 8: load_dotenv()
+- Loads environment variables from .env file (if it exists)
+
+Line 11: @tool("get_weather")
+- Decorator that registers get_weather as a tool with the name "get_weather"
+
+Line 12: def get_weather(city: str):
+- Defines a function that takes a city name as a string parameter
+
+Line 13: """Get the current weather for a given location."""
+- Docstring describing the tool's purpose (used by the agent to understand when to use it)
+
+Line 14: response = requests.get(f"https://wttr.in/{city}?format=j1")
+- Makes an HTTP GET request to wttr.in weather API with the city name, requesting JSON format
+
+Line 15: return response.json()
+- Parses the response as JSON and returns the weather data
+
+Line 18-19: # Create LLM object (NOT string)
+- Comment explaining that llm should be an object, not a string
+
+Line 19: llm = ChatOllama(model="llama3.1:8b")
+- Creates a ChatOllama instance using llama3.1 8B model
+
+Line 22-31: agent = create_agent(...)
+- Creates an AI agent with specified configuration
+
+Line 23: model=llm,   # <-- IMPORTANT change
+- Sets the language model to the ChatOllama instance created earlier
+
+Line 24: tools=[get_weather],
+- Provides the get_weather tool to the agent so it can fetch real weather data
+
+Line 25-30: system_prompt=(...)
+- Defines the agent's behavior: be funny, always use the weather tool, return short responses, don't explain JSON
+
+Line 33-42: response = agent.invoke({...})
+- Invokes the agent with a user message asking for weather in Madurai
+
+Line 34-40: "messages": [{"role": "user", "content": "Weather tomorrow in Madurai. Make it funny and short."}]
+- Sends a user message asking for weather in Madurai with humor
+
+Line 43: print(response)
+- Prints the full response object including metadata and messages
+
+Line 44: print(response["messages"][-1].content)
+- Prints only the content of the last message (the agent's final response)

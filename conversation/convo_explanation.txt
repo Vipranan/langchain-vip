@@ -1,0 +1,38 @@
+LINE-BY-LINE EXPLANATION: convo.py
+==========================================
+
+Line 1: import requests
+- Imports the requests library (not used in this code)
+
+Line 2: from langchain_ollama import ChatOllama
+- Imports ChatOllama class to interact with Ollama language models
+
+Line 3: from langchain.messages import (AIMessage, HumanMessage, SystemMessage)
+- Imports message classes to structure conversation history
+
+Line 5-7: llm = ChatOllama(model="llama3.1:8b", temperature=0.9)
+- Creates a ChatOllama instance using llama3.1 8B model with temperature 0.9 (more creative/random responses)
+
+Line 9-14: conversation = [...]
+- Creates a conversation history list with multiple messages
+
+Line 10: SystemMessage(content="You are a helpful assistant for question regarding programming.")
+- Sets the system prompt defining the assistant's role as a programming helper
+
+Line 11: HumanMessage(content="What is python ?")
+- First user question asking about Python
+
+Line 12: AIMessage(content="Python is a high-level, interpreted programming language...")
+- AI's previous response explaining what Python is
+
+Line 13: HumanMessage(content="What is the latest version of python ?")
+- Follow-up user question asking about the latest Python version
+
+Line 16: response = llm.invoke(conversation)
+- Sends the entire conversation to the model and gets a response
+
+Line 17: #print(response)
+- Commented out code that would print the full response object
+
+Line 18: print(response.content)
+- Prints only the content of the response (the AI's answer to the latest question)
