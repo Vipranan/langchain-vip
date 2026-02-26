@@ -13,3 +13,4 @@ llm = ChatOllama(model="llama3.1:8b", base_url="http://localhost:11434")
 response = llm.invoke("What is the weather like in mumbai? Make it funny!")
 
 print(response.content)
+

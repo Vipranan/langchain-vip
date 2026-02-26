@@ -1,0 +1,59 @@
+LINE-BY-LINE EXPLANATION: advanced.py
+==========================================
+
+Line 1: from dataclasses import dataclass
+- Imports the dataclass decorator (not used in this code)
+
+Line 2: from pyexpat.errors import messages
+- Imports messages from pyexpat.errors (not used in this code, likely accidental import)
+
+Line 3: import requests
+- Imports the requests library for making HTTP requests
+
+Line 4: from langchain_ollama import ChatOllama
+- Imports ChatOllama class to interact with Ollama language models
+
+Line 5: from langchain.agents import create_agent
+- Imports the create_agent function to build an AI agent
+
+Line 6: from langchain.tools import tool
+- Imports the tool decorator to define custom tools for the agent
+
+Line 8: @tool("get_weather", description="Get the current weather for a given location.", return_direct=False)
+- Decorator that registers get_weather as a tool with name, description, and return_direct flag
+
+Line 9: def get_weather(city: str):
+- Defines a function that takes a city name as a string parameter
+
+Line 10: response = requests.get(f"https://wttr.in/{city}?format=j1")
+- Makes an HTTP GET request to wttr.in weather API with the city name, requesting JSON format
+
+Line 11: return response.json()
+- Parses the response as JSON and returns the weather data
+
+Line 13: agent = create_agent(
+- Starts creating an AI agent with specified configuration
+
+Line 14: model=ChatOllama(model="llama3.1:8b"),
+- Sets the language model to Ollama's llama3.1 8-billion parameter model
+
+Line 15: tools=[get_weather],
+- Provides the get_weather tool to the agent so it can fetch weather data
+
+Line 16-17: system_prompt=(...)
+- Defines the agent's behavior: be humorous, always use the weather tool, return short responses
+
+Line 20-28: # response = agent.invoke({...})
+- Commented out code that would invoke the agent once and get a complete response
+
+Line 31: # print(response["messages"][-1].content)
+- Commented out code that would print the last message content from the response
+
+Line 33-40: for chunk in agent.stream({...}):
+- Streams the agent's response in chunks for real-time output
+
+Line 34-38: "messages": [{"role": "user", "content": "Weather tomorrow in Madurai. Make it funny and short."}]
+- Sends a user message asking for weather in Madurai with humor
+
+Line 41-42: if "messages" in chunk: print(chunk["messages"][-1].content, end="", flush=True)
+- Prints each chunk of the response as it arrives, without newlines, flushing immediately for real-time display

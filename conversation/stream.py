@@ -5,7 +5,5 @@ model = ChatOllama(
     model="llama3.1:8b",
     temperature=0.7,
 )
-
-response = model.invoke('hello, what is python ?')
-
-print(response.content)
+for chunk in model.stream('hello, what is python ?'):
+    print(chunk.text, end='', flush=True)

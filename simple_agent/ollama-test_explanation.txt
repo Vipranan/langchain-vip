@@ -1,0 +1,14 @@
+LINE-BY-LINE EXPLANATION: ollama-test.py
+==========================================
+
+Line 1: from langchain_ollama import OllamaLLM
+- Imports OllamaLLM class for basic text generation with Ollama models
+
+Line 3-7: llm = OllamaLLM(model="llama3.1:8b", base_url="http://localhost:11434", temperature=0.7)
+- Creates an OllamaLLM instance with llama3.1 8B model, local Ollama server URL, and temperature 0.7
+
+Line 9: response = llm.invoke("give me the weather forecast for tomorrow in madurai, make it funny!, make it short and concise")
+- Sends a prompt asking for a funny weather forecast for Madurai (note: model will make up data as it has no weather tool)
+
+Line 10: print(response)
+- Prints the model's response to the console
