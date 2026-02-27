@@ -80,6 +80,33 @@ def test_replicate(api_key):
     except:
         return False, None, []
 
+def test_grok(api_key):
+    """Test if API key is from Grok"""
+    try:
+        # Grok uses its own endpoint domain
+        headers = {"Authorization": f"Bearer {api_key}"}
+        response = requests.get("https://api.grok.com/v1/models", headers=headers, timeout=5)
+        # treat 200, 401 or 403 as indications the endpoint exists (401/403 may mean invalid key)
+        if response.status_code in [200, 401, 403]:
+            models = []
+            try:
+                body = response.json()
+                # some endpoints mirror OpenAI format
+                if 'data' in body:
+                    models = [model.get('id') for model in body.get('data', [])]
+                elif 'models' in body:
+                    models = [m.get('id') if isinstance(m, dict) else m for m in body.get('models', [])]
+            except Exception:
+                pass
+            return True, "Grok", models
+        # print debug info on unexpected status codes for troubleshooting
+        print(f"Grok probe returned {response.status_code}: {response.text}")
+        return False, None, []
+    except Exception as e:
+        print("Grok test exception:", e)
+        return False, None, []
+
+
 def test_stability_ai(api_key):
     """Test if API key is from Stability AI"""
     try:
@@ -104,6 +131,7 @@ def identify_api_key(api_key):
         test_huggingface,
         test_cohere,
         test_replicate,
+        test_grok,
         test_stability_ai
     ]
     
